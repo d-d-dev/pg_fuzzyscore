@@ -1,0 +1,7 @@
+*.o
+*.so
+*.bc
+pg_fuzzyscore.sql
+.vscode
+results/
+*.fish

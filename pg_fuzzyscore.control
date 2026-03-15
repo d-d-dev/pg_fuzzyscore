@@ -1,0 +1,4 @@
+comment = 'Fuzzy search based on https://github.com/farzher/fuzzysort'
+default_version = '0.1'
+module_pathname = '$libdir/pg_fuzzyscore'
+relocatable = true
