@@ -9,7 +9,7 @@ int get_next_beginning_index(
 );
 
 double calculate_score(
-    int *matches, 
+    uint16_t *matches, 
     int search_len, 
     int target_len, 
     bool strict_match, 
