@@ -132,6 +132,8 @@ fuzzyscore(PG_FUNCTION_ARGS)
 {
 
     MemoryContext old_ctx;
+    char *input;
+    size_t input_length;
     char *search;
     char *token;
     
@@ -150,7 +152,9 @@ fuzzyscore(PG_FUNCTION_ARGS)
         old_ctx = MemoryContextSwitchTo(fcinfo->flinfo->fn_mcxt);
         /* Create the search plan since it doesn't exist */
         plan = palloc0(sizeof(FuzzySearchPlan));
-        search = text_to_cstring(PG_GETARG_TEXT_PP(1));
+        input = text_to_cstring(PG_GETARG_TEXT_PP(1));
+        input_length = strlen(input) + 1;
+        normalize(input, search, input_length);
 
         /* Use strtok to split the search into tokens, then calculate each token's bitflags */
         token = strtok(search, " ");

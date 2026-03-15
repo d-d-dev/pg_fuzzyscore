@@ -9,27 +9,28 @@
 
 ## Installation:
 1. Installing it with PostgreSQL 17
-```
+```sh
 sudo apt update && apt install -y git build-essential postgresql-server-dev-17
+
 git clone https://github.com/d-d-dev/pg_fuzzyscore.git
 cd pg_fuzzyscore
 make
 sudo make install
 ```
 2. Then create the extension inside PostgreSQL
-```
+```sql
 CREATE EXTENSION pg_fuzzyscore;
 ```
 
 
 ## Usage:
 1. Prepare your data.
-```
+```sql
 ALTER TABLE items ADD COLUMN prepared bytea;
 UPDATE items SET prepared = fuzzyprepare(name);
 ```
 2. Search using the prepared column and a threshold value.
-```
+```sql
 SELECT * FROM items 
 WHERE fuzzyscore(prepared, 'some item') > 0.3
 ORDER BY fuzzyscore(prepared, 'some item') DESC;
