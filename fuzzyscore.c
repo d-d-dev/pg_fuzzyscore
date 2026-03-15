@@ -154,6 +154,8 @@ fuzzyscore(PG_FUNCTION_ARGS)
         plan = palloc0(sizeof(FuzzySearchPlan));
         input = text_to_cstring(PG_GETARG_TEXT_PP(1));
         input_length = strlen(input) + 1;
+
+        search = (char *) palloc(sizeof(char) * (input_length));
         normalize(input, search, input_length);
 
         /* Use strtok to split the search into tokens, then calculate each token's bitflags */
