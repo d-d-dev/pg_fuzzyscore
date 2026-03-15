@@ -12,9 +12,9 @@
 #define MAX_BACKTRACK 200
 
 int get_next_beginning_index(
-    const int *indices_array, 
-    int indices_count, 
-    int pos
+    const uint16_t *indices_array, 
+    uint16_t indices_count, 
+    uint16_t pos
 ) {
     /* nextBeginningIndices are not stored in the prepared column
        so we'll get them by iterating over the indices    
@@ -73,7 +73,7 @@ double calculate_score(
 double algorithm(
     const char *search, int search_len, 
     const char *target, int target_len, 
-    const uint16_t *indices_array, int indices_count
+    const uint16_t *indices_array, uint16_t indices_count
 ) {
     
     int target_idx = 0;

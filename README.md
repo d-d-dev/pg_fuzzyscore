@@ -14,13 +14,31 @@
 ALTER TABLE items ADD COLUMN prepared bytea;
 UPDATE items SET prepared = fuzzyprepare(name);
 ```
-2. Search using the prepared column.
+2. Search using the prepared column and a threshold value.
 ```
 SELECT * FROM items 
-WHERE fuzzyscore(prepared, 'some item') > 0.5
+WHERE fuzzyscore(prepared, 'some item') > 0.3
 ORDER BY fuzzyscore(prepared, 'some item') DESC;
 ```
+
+## Installation:
+First install PostgreSQL development tools (tested in PostgreSQL 17):
+```
+sudo apt update && apt install -y git build-essential postgresql-server-dev-17
+```
+Then
+```
+git clone https://github.com/d-d-dev/pg_fuzzyscore.git
+cd pg_fuzzyscore
+make
+sudo make install
+```
+
 
 ## Credits:
 This project is a C port of the excellent fuzzysort library created by farzher.
 The core scoring logic and backtracking algorithm are based on his original work, i just tried my best to try and understand his code and port it, it is not a 1:1 port.
+
+## Limitations:
+* Performance is bad on 1M+ rows.
+* No indexing support.
