@@ -90,7 +90,7 @@ double algorithm(
 
     bool strict_success = false;
     
-    int *best_matches;
+    uint16_t *best_matches;
     int last_match;
     int backtrack_count = 0;
 
