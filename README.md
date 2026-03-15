@@ -4,8 +4,22 @@
 ## Features:
 * **IDE-Style Matching:** Implements the strict backtracking algorithm to reward word-boundary matches (e.g., `fs` matches **F**uzzy**S**ort).
 * **Multi-token Support:** Handles spaces naturally by splitting search strings into tokens (up to 16).
-* **Normalization:** Accent removal and lowercasing.
+* **Normalization:** Built-in accent removal and lowercasing.
 * **Prepared rows:** Stores the prepared target string in a BYTEA column and uses it for the matching algorithm.
+
+## Installation:
+1. Installing it with PostgreSQL 17
+```
+sudo apt update && apt install -y git build-essential postgresql-server-dev-17
+git clone https://github.com/d-d-dev/pg_fuzzyscore.git
+cd pg_fuzzyscore
+make
+sudo make install
+```
+2. Then create the extension inside PostgreSQL
+```
+CREATE EXTENSION pg_fuzzyscore;
+```
 
 
 ## Usage:
@@ -19,19 +33,6 @@ UPDATE items SET prepared = fuzzyprepare(name);
 SELECT * FROM items 
 WHERE fuzzyscore(prepared, 'some item') > 0.3
 ORDER BY fuzzyscore(prepared, 'some item') DESC;
-```
-
-## Installation:
-First install PostgreSQL development tools (tested in PostgreSQL 17):
-```
-sudo apt update && apt install -y git build-essential postgresql-server-dev-17
-```
-Then
-```
-git clone https://github.com/d-d-dev/pg_fuzzyscore.git
-cd pg_fuzzyscore
-make
-sudo make install
 ```
 
 

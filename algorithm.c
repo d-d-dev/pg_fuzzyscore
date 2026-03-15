@@ -80,8 +80,8 @@ double algorithm(
     int search_idx = 0;
 
     /* Up to 256 matches should be enough... */
-    int matches_simple[256] = { 0 };
-    int matches_strict[256] = { 0 };
+    uint16_t matches_simple[256] = { 0 };
+    uint16_t matches_strict[256] = { 0 };
 
     const char *substring_ptr = strstr(target, search);
     bool is_substring = substring_ptr != NULL;
@@ -128,7 +128,7 @@ double algorithm(
 
     /* Strict fuzzy match with backtracking, start at the beginning of the word in the first match (that's where the beginning indices come in handy) */
     search_idx = 0;
-    target_idx = matches_simple[0] == 0 ? 0 : get_next_beginning_index(indices_array, indices_count, matches_simple[0]);   //ahora si entiendo
+    target_idx = matches_simple[0] == 0 ? 0 : get_next_beginning_index(indices_array, indices_count, matches_simple[0]);
 
     while(true) {
         /* we get here when backtracking */
